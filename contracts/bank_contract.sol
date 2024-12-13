@@ -31,4 +31,8 @@ contract Bank{
     function check_balance() public view returns (uint) {
         return account_balance[msg.sender];
     }
+
+    function get_blocks() public returns(uint[] memory){
+        return blocks[msg.sender];
+    }
 }
