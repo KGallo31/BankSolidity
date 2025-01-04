@@ -32,7 +32,7 @@ contract Bank{
         return account_balance[msg.sender];
     }
 
-    function get_blocks() public returns(uint[] memory){
+    function get_blocks() public view returns(uint[] memory){
         return blocks[msg.sender];
     }
 }
