@@ -3,13 +3,13 @@ from brownie import Bank, accounts, chain
 from web3 import Web3, HTTPProvider
 
 def main():
-    w3 = Web3(HTTPProvider('https://127.0.0.1:8545'))
-    json_file_path = open('build/contracts/Bank.json')
-    data = json.load(json_file_path)
-    abi = data['abi']
-    address = '0xD8666528c2C45846DcB7fC78DE5Df3BCE541Dfd4'
+    # w3 = Web3(HTTPProvider('https://127.0.0.1:8545'))
+    # json_file_path = open('build/contracts/Bank.json')
+    # data = json.load(json_file_path)
+    # abi = data['abi']
+    address = ''
     bank_contract = Bank.at(address)
-    contract = w3.eth.contract(address=address, abi=abi)
+    # contract = w3.eth.contract(address=address, abi=abi)
 
 
     # bank_contract.deposit_funds({'from': accounts[1], 'value': 150})
@@ -27,18 +27,18 @@ def main():
 
     # print("Blocks of account 1: ", bank_contract.get_blocks({'from': accounts[1]}))
 
-    blocks = bank_contract.get_blocks({'from': accounts[1]})
-    for num in blocks:  
-        block = chain[num]
-        tx = w3.eth.getTransation(block.transactions[0])
-        hist = contract.decode_function_input(tx.input)
+    # blocks = bank_contract.get_blocks({'from': accounts[1]})
+    # for num in blocks:  
+    #     block = chain[num]
+    #     tx = w3.eth.getTransation(block.transactions[0])
+    #     hist = contract.decode_function_input(tx.input)
 
-        if str(hist[0]) == '<Function deposit_funds()>':
-            print('Funds Deposited:', tx.value)
-        elif str(hist[0]) == '<Function withdraw_funds()>':
-            print('Funds Withdrawn:', hist[1]["_funds"])
-        else:
-            print('Funds Transferred to account number', hist[1]['receiving_address'], ':' , hist[1]['_funds'] )
+    #     if str(hist[0]) == '<Function deposit_funds()>':
+    #         print('Funds Deposited:', tx.value)
+    #     elif str(hist[0]) == '<Function withdraw_funds()>':
+    #         print('Funds Withdrawn:', hist[1]["_funds"])
+    #     else:
+    #         print('Funds Transferred to account number', hist[1]['receiving_address'], ':' , hist[1]['_funds'] )
 
     
 
