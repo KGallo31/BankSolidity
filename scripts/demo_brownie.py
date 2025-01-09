@@ -27,18 +27,18 @@ def main():
 
     # print("Blocks of account 1: ", bank_contract.get_blocks({'from': accounts[1]}))
 
-    # blocks = bank_contract.get_blocks({'from': accounts[1]})
-    # for num in blocks:  
-    #     block = chain[num]
-    #     tx = w3.eth.getTransation(block.transactions[0])
-    #     hist = contract.decode_function_input(tx.input)
+    blocks = bank_contract.get_blocks({'from': accounts[1]})
+    for num in blocks:  
+        block = chain[num]
+        tx = w3.eth.get_transaction(block.transactions[0])
+        hist = contract.decode_function_input(tx.input)
 
-    #     if str(hist[0]) == '<Function deposit_funds()>':
-    #         print('Funds Deposited:', tx.value)
-    #     elif str(hist[0]) == '<Function withdraw_funds()>':
-    #         print('Funds Withdrawn:', hist[1]["_funds"])
-    #     else:
-    #         print('Funds Transferred to account number', hist[1]['receiving_address'], ':' , hist[1]['_funds'] )
+        if str(hist[0]) == '<Function deposit_funds()>':
+            print('Funds Deposited:', tx.value)
+        elif str(hist[0]) == '<Function withdraw_funds(uint256)>':
+            print('Funds Withdrawn:', hist[1]["_funds"])
+        else:
+            print('Funds Transferred to account number', hist[1]['receiving_address'], ':' , hist[1]['_funds'] )
 
     
 
